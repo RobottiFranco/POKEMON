@@ -105,7 +105,7 @@ function battle()
     {
         result = "EMPATE"
     }
-    else if((playerAttack==  "fire" && enemyAttack == "plant") || (playerAttack ==  "water" && enemyAttack == "fire") || (playerAttack ==  "plant" && enemyAttack == "water"))
+    else if((playerAttack ==  "fire" && enemyAttack == "plant") || (playerAttack ==  "water" && enemyAttack == "fire") || (playerAttack ==  "plant" && enemyAttack == "water"))
     {
         result = "GANASTE"
         enemyLives --
