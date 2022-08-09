@@ -1,0 +1,3 @@
+reparar que si el jugador no elige no pueda pelear
+agregar css
+reparar seccion de resultados a imprimir

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./js/pokemon.js"></script>
+    <script src="./js/pokemon.js" type="module"></script>
+    <link rel="stylesheet" href="CSS/style.css">
     <title>POKEMON!</title>
 </head>
 <body>
@@ -38,8 +39,8 @@
     <section id="section-attack">
         <h2>Select attack:</h2>
         
-        <p>➡️Tu <span id="pokemon-player">pokemon</span> tiene <span>3</span> vidas</p>
-        <p>➡️El <span id="pokemon-enemy">pokemon</span> enemigo tiene <span>3</span> vidas</p>
+        <p>➡️Tu <span id="pokemon-player">pokemon</span> tiene <span id="player-lives">3</span> vidas</p>
+        <p>➡️El <span id="pokemon-enemy">pokemon</span> enemigo tiene <span id="enemy-lives">3</span> vidas</p>
 
         <div>
             <button id="fire-button">Fire 🔥</button>
@@ -51,8 +52,6 @@
 
     <section id="message">
         <h2>resultado de la pelea: <span id="result-battle">resultado</span></h2>
-        <p>utilizaste <span id="player-attack">tu ataque</span> el enemigo utilizo <span id="enemy-attack">Ataque enemigo</span></p>
-        <p></p>
     </section>
 
     <section id="section-reset">

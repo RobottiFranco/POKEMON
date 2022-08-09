@@ -1,3 +1,6 @@
+let enemyLives = 3
+let playerLives = 3
+
 let playerAttack
 let enemyAttack
 
@@ -7,8 +10,7 @@ function startGame()
     let buttonSelect = document.getElementById("select-button")
     buttonSelect.addEventListener("click", selectPet)    
 
-
-    //mando a modo de ataque
+    //mando a seccion de ataque
     let buttonAttackByFire = document.getElementById("fire-button")
     buttonAttackByFire.addEventListener("click", fireAttack)
 
@@ -39,15 +41,6 @@ function plantAttack()
     game()
 }
 
-function game()
-{
-    enemyAttack = randomEnemyAttack()
-
-    document.getElementById("player-attack").innerHTML = playerAttack
-    document.getElementById("enemy-attack").innerHTML = enemyAttack
-    document.getElementById("result-battle").innerHTML = battle()
-}
-
 //enemy attack function
 function randomEnemyAttack()
 {
@@ -70,6 +63,38 @@ function randomEnemyAttack()
     return enemyAttack
 }
 
+function game()
+{
+    enemyAttack = randomEnemyAttack()
+    const combatResult = battle()
+
+    printBattleResult(combatResult)
+}
+
+function printBattleResult(combatResult)
+{
+    let message = document.getElementById("message")
+    let text = document.createElement("p")
+
+    text.innerHTML = "Utilizaste " + playerAttack + " y el enemigo utilizo " + enemyAttack
+
+    //result
+    document.getElementById("result-battle").innerHTML = combatResult
+
+    message.appendChild(text)
+    
+    if (combatResult == "GANASTE")
+    {
+        //player lives (por arreglar)
+        document.getElementById("enemy-lives").innerHTML = enemyLives
+    }
+    else if (combatResult == "PERDISTE")
+    {
+        //player lives (por arreglar)
+        document.getElementById("player-lives").innerHTML = playerLives
+    }
+}
+
 //function battle
 function battle()
 {
@@ -83,17 +108,19 @@ function battle()
     else if((playerAttack==  "fire" && enemyAttack == "plant") || (playerAttack ==  "water" && enemyAttack == "fire") || (playerAttack ==  "plant" && enemyAttack == "water"))
     {
         result = "GANASTE"
+        enemyLives --
     }
     else
     {
         result = "PERDISTE"
+        playerLives --
     }
 
     return result
 }
 
-
 //utils function
+
 function random(min, max)
 {
     return Math.floor( Math.random() * (max - min + 1) + min)
