@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/pokemon.js"></script>
+    <title>POKEMON!</title>
+</head>
+<body>
+
+    <header>
+        <h1>Juegemos Pokemon! 🔥💧🌱</h1>
+    </header>
+
+    <section id="select-section"> 
+
+        <h2>Select your pet:</h2>
+
+        <div>
+            <label for="charmander">Charmander🔥</label>
+            <input type="radio" name="pet" id="charmander">
+        </div>
+
+        <div>
+            <label for="bulbasaur">Bulbasaur💧</label>
+            <input type="radio" name="pet" id="bulbasaur">
+        </div>
+
+        <div>
+            <label for="ivysaur">Ivysaur🌱</label>
+            <input type="radio" name="pet" id="ivysaur">
+        </div>
+
+        <button id="select-button">Select</button>
+    </section>
+
+    <section id="section-attack">
+        <h2>Select attack:</h2>
+        
+        <p>➡️Tu <span id="pokemon-player">pokemon</span> tiene <span>3</span> vidas</p>
+        <p>➡️El <span id="pokemon-enemy">pokemon</span> enemigo tiene <span>3</span> vidas</p>
+
+        <div>
+            <button id="fire-button">Fire 🔥</button>
+            <button id="water-button">Water 💧</button>
+            <button id="plant-button">Plant 🌱</button>
+        </div>
+
+    </section>  
+
+    <section id="message">
+        <p>resultado de la pelea</p>
+    </section>
+
+    <section id="section-reset">
+        <button id="button-reset">Reiniciar juego</button>
+    </section>
+</body>
+</html>
