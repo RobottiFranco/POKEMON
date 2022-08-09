@@ -1,15 +1,106 @@
+let attackPlayer
+let enemyAttack
+
 function startGame()
 {
+    //mando a seleccion de mascotas
     let buttonSelect = document.getElementById("select-button")
     buttonSelect.addEventListener("click", selectPet)    
+
+    //mando a modo de ataque
+    let buttonAttackByFire = document.getElementById("fire-button")
+    buttonAttackByFire.addEventListener("click", fireAttack)
+
+    let buttonAttackByWater = document.getElementById("water-button")
+    buttonAttackByWater.addEventListener("click", waterAttack)
+
+    let buttonAttackByPlant = document.getElementById("plant-button")
+    buttonAttackByPlant.addEventListener("click", plantAttack)
 }
 
+
+//attack player function
+function fireAttack()
+{
+    attackPlayer = "fire"
+    game()
+}
+
+function waterAttack()
+{
+    attackPlayer = "water"
+    game()
+}
+
+function plantAttack()
+{
+    attackPlayer = "plant"
+    game()
+}
+
+//function battle
+function battle()
+{
+    let result
+    //fire > plant - water > fire - plant > water
+
+    if (attackPlayer == enemyAttack)
+    {
+        result = "EMPATE"
+    }
+    else if((attackPlayer ==  "fire" && enemyAttack == "plant") || (attackPlayer ==  "water" && enemyAttack == "fire") || (attackPlayer ==  "plant" && enemyAttack == "water"))
+    {
+        result = "GANASTE"
+    }
+    else
+    {
+        result = "PERDISTE"
+    }
+
+    return result
+}
+
+function game()
+{
+    attackPlayer = attackPlayer
+    enemyAttack = randomEnemyAttack()
+
+    document.getElementById("player-attack").innerHTML = attackPlayer
+    document.getElementById("enemy-attack").innerHTML = enemyAttack
+    document.getElementById("result-battle").innerHTML = battle()
+}
+
+
+//enemy attack function
+function randomEnemyAttack()
+{
+    //1 = fire 2 = water 3 = plant
+    const selection = random(1,3)
+    
+    if (selection == 1)
+    {
+        enemyAttack = "fire"
+    }
+    else if (selection == 2)
+    {
+        enemyAttack = "water"
+    }
+    else
+    {
+        enemyAttack = "plant"
+    }
+
+    return enemyAttack
+}
+
+//utils function
 function random(min, max)
 {
     return Math.floor( Math.random() * (max - min + 1) + min)
 }
 
-function petGamer()
+//player pet selection function
+function playerPet()
 {
     let selection = ""
 
@@ -40,39 +131,41 @@ function petGamer()
     return selection
 }
 
-function petBot()
+//bot pet selection function
+function enemyPet()
 {
-    let bot = random(1,3)
-    let selectionBot = ""
+    //1 = charmander 2 = bulbasaur 3 = ivysaur
+    let selection = random(1,3)
+    let pet = ""
 
-    if (bot == 1) //input charmander
+    if (selection == 1)
     {
-        selectionBot = "charmander"
+        pet = "charmander"
     }
-    else if(bot == 2) //input bulbasaur
+    else if(selection == 2)
     {
-        selectionBot = "bulbasaur"
+        pet = "bulbasaur"
     }
-    else //input ivysaur
+    else 
     {
-        selectionBot = "ivysaur"
+        pet = "ivysaur"
     }
 
-    return selectionBot
+    return pet
 }
 
 function selectPet()
 {
-    if (petGamer() != -1)
+    if (playerPet() != -1)
     {
-        let botSelection =  petBot()
-        let user = petGamer()
+        const enemySelection =  enemyPet()
+        const user = playerPet()
 
-        alert("seleccionste " + user)
+        //alert("seleccionste " + user)
         document.getElementById("pokemon-player").innerHTML = user
 
-        alert("el enemigo selecciono " + botSelection)
-        document.getElementById("pokemon-enemy").innerHTML = botSelection
+        //alert("el enemigo selecciono " + botSelection)
+        document.getElementById("pokemon-enemy").innerHTML = enemySelection
     }
     else
     {
@@ -82,4 +175,5 @@ function selectPet()
 
 
 //main program
+
 window.addEventListener("load", startGame)
