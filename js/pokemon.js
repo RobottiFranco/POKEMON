@@ -1,4 +1,4 @@
-let attackPlayer
+let playerAttack
 let enemyAttack
 
 function startGame()
@@ -6,6 +6,7 @@ function startGame()
     //mando a seleccion de mascotas
     let buttonSelect = document.getElementById("select-button")
     buttonSelect.addEventListener("click", selectPet)    
+
 
     //mando a modo de ataque
     let buttonAttackByFire = document.getElementById("fire-button")
@@ -16,60 +17,36 @@ function startGame()
 
     let buttonAttackByPlant = document.getElementById("plant-button")
     buttonAttackByPlant.addEventListener("click", plantAttack)
-}
 
+}
 
 //attack player function
 function fireAttack()
 {
-    attackPlayer = "fire"
+    playerAttack = "fire"
     game()
 }
 
 function waterAttack()
 {
-    attackPlayer = "water"
+    playerAttack = "water"
     game()
 }
 
 function plantAttack()
 {
-    attackPlayer = "plant"
+    playerAttack = "plant"
     game()
-}
-
-//function battle
-function battle()
-{
-    let result
-    //fire > plant - water > fire - plant > water
-
-    if (attackPlayer == enemyAttack)
-    {
-        result = "EMPATE"
-    }
-    else if((attackPlayer ==  "fire" && enemyAttack == "plant") || (attackPlayer ==  "water" && enemyAttack == "fire") || (attackPlayer ==  "plant" && enemyAttack == "water"))
-    {
-        result = "GANASTE"
-    }
-    else
-    {
-        result = "PERDISTE"
-    }
-
-    return result
 }
 
 function game()
 {
-    attackPlayer = attackPlayer
     enemyAttack = randomEnemyAttack()
 
-    document.getElementById("player-attack").innerHTML = attackPlayer
+    document.getElementById("player-attack").innerHTML = playerAttack
     document.getElementById("enemy-attack").innerHTML = enemyAttack
     document.getElementById("result-battle").innerHTML = battle()
 }
-
 
 //enemy attack function
 function randomEnemyAttack()
@@ -92,6 +69,29 @@ function randomEnemyAttack()
 
     return enemyAttack
 }
+
+//function battle
+function battle()
+{
+    let result
+    //fire > plant - water > fire - plant > water
+
+    if (playerAttack == enemyAttack)
+    {
+        result = "EMPATE"
+    }
+    else if((playerAttack==  "fire" && enemyAttack == "plant") || (playerAttack ==  "water" && enemyAttack == "fire") || (playerAttack ==  "plant" && enemyAttack == "water"))
+    {
+        result = "GANASTE"
+    }
+    else
+    {
+        result = "PERDISTE"
+    }
+
+    return result
+}
+
 
 //utils function
 function random(min, max)
@@ -159,21 +159,22 @@ function selectPet()
     if (playerPet() != -1)
     {
         const enemySelection =  enemyPet()
-        const user = playerPet()
+        const player = playerPet()
 
         //alert("seleccionste " + user)
-        document.getElementById("pokemon-player").innerHTML = user
+        document.getElementById("pokemon-player").innerHTML = player
 
         //alert("el enemigo selecciono " + botSelection)
         document.getElementById("pokemon-enemy").innerHTML = enemySelection
+        return 1
     }
     else
     {
         alert("selecciona una mascota")
+        return -1
     }
 }
 
 
-//main program
 
 window.addEventListener("load", startGame)
