@@ -20,6 +20,14 @@ function startGame()
     let buttonAttackByPlant = document.getElementById("plant-button")
     buttonAttackByPlant.addEventListener("click", plantAttack)
 
+    // reset game
+    let buttonReset = document.getElementById("reset-button")
+    buttonReset.addEventListener("click", resetGame)
+}
+
+function resetGame()
+{
+    
 }
 
 //attack player function
@@ -65,10 +73,13 @@ function randomEnemyAttack()
 
 function game()
 {
-    enemyAttack = randomEnemyAttack()
-    const combatResult = battle()
-
-    printBattleResult(combatResult)
+    if ((playerLives > 0) && (enemyLives  > 0))
+    {
+        enemyAttack = randomEnemyAttack()
+        const battleResult = battle()
+    
+        printBattleResult(battleResult)
+    }
 }
 
 function printBattleResult(combatResult)
@@ -76,23 +87,61 @@ function printBattleResult(combatResult)
     let message = document.getElementById("message")
     let text = document.createElement("p")
 
-    text.innerHTML = "Utilizaste " + playerAttack + " y el enemigo utilizo " + enemyAttack
+    let enemyIcon = stringToIcon(enemyAttack)
+    let playerIcon = stringToIcon(playerAttack)
 
-    //result
+    let result  = "Tu "+  document.getElementById("pokemon-player").innerHTML + " utilizo " + playerIcon + ", el " + document.getElementById("pokemon-enemy").innerHTML + " enemigo utilizo"+ enemyIcon + ": " + combatResult
+
+    text.innerHTML = result
+
     document.getElementById("result-battle").innerHTML = combatResult
 
     message.appendChild(text)
     
+
     if (combatResult == "GANASTE")
     {
-        //player lives (por arreglar)
         document.getElementById("enemy-lives").innerHTML = enemyLives
     }
     else if (combatResult == "PERDISTE")
     {
-        //player lives (por arreglar)
         document.getElementById("player-lives").innerHTML = playerLives
     }
+
+
+    if (playerLives == 0)
+    {
+        document.getElementById("result-battle").innerHTML = "Ganaste"
+        alert("GANASTE 🏆")
+    }
+    else if (enemyLives == 0)
+    {
+        document.getElementById("result-battle").innerHTML = "Perdiste"
+        alert("PERDISTE 😭")
+    }
+    else
+    {
+        document.getElementById("result-battle").innerHTML = "en duelo"
+    }
+}
+function stringToIcon(stringChange)
+{
+    let icon
+    
+    if (stringChange == "fire")
+    {
+        icon = "🔥"
+    }
+    if (stringChange == "water")
+    {
+        icon = "💧"
+    }
+    else
+    {
+        icon = "🌱"
+    }
+
+    return icon
 }
 
 //function battle

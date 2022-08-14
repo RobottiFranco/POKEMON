@@ -52,6 +52,8 @@ button{
 button:hover{
     color: #cc5577;
     background-color: deeppink;
+    cursor: pointer;
+    box-shadow: inset deeppink;
 }
 
 
